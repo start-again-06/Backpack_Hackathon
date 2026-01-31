@@ -1,93 +1,144 @@
-✨ Tabular Playground Series ✨
+Tabular Playground Series
+System Design and High-Level Architecture
 
-Welcome to the Tabular Playground Series! This repository contains scripts and resources for tackling Kaggle's Tabular Playground competitions, designed to help the community learn and sharpen their data science skills.
+# System Overview
+The Tabular Playground Series system is designed to solve Kaggle’s lightweight tabular machine learning competitions using synthetic datasets. The architecture emphasizes rapid experimentation, robust feature engineering, and reproducible model training workflows to improve applied data science skills.
 
-🌟 Overview
+# Design Goals
+- Fast iteration and experimentation
+- Clear separation of data, modeling, and evaluation layers
+- Reproducible and competition-ready pipeline
+- Scalable to multiple Tabular Playground editions
 
-The Tabular Playground Series provides lightweight machine learning challenges that:
+# High-Level Architecture
 
-⏳ Run for a few weeks.
+Data Layer
+- Source: Kaggle Tabular Playground Series datasets
+- Data Types:
+  - Training dataset
+  - Test dataset
+  - Optional extra synthetic training data
+- Storage:
+  - CSV-based datasets stored locally under data/
 
-📚 Use synthetic datasets based on real-world data.
+Data Ingestion Layer
+- Load raw CSV files into memory
+- Validate schema consistency between train and test
+- Identify numerical and categorical feature sets
+- Separate target variable from feature matrix
 
-🎯 Help improve modeling and feature engineering skills.
+Exploratory Data Analysis (EDA) Layer
+- Summary statistics for train, test, and extra datasets
+- Distribution analysis of target variable
+- Visualization of numerical and categorical features
+- Missing value detection using statistical and visual tools
+- Correlation analysis using heatmaps and boxplots
 
-🎨 Encourage creativity in data visualization.
+Data Preprocessing Layer
+- Missing Value Handling:
+  - Median imputation for numerical features
+  - 'None' category for categorical features
+- Feature Encoding:
+  - Target encoding for categorical variables
+- Feature Scaling:
+  - Standard scaling for numerical features
+- Output:
+  - Clean, model-ready feature matrix
 
-💡 Why Synthetic Data?
+# Modeling Layer
+- Model Type: Supervised Regression
+- Architecture: Deep Neural Network (DNN)
+- Framework: TensorFlow / Keras
+- Network Design:
+  - Input layer matching feature dimensions
+  - Three fully connected dense layers
+  - Batch Normalization after each dense layer
+  - Dropout for regularization
+  - L2 weight regularization
+- Optimization:
+  - Optimizer: Adam
+  - Loss Function: Mean Squared Error
+  - Metric: Root Mean Squared Error (RMSE)
 
-Synthetic datasets allow for more interesting challenges while keeping test labels private. Over time, the quality of synthetic data has improved significantly, leading to:
+# Training & Validation Layer
+- Train-validation split from training data
+- Early stopping based on validation RMSE
+- Continuous monitoring of training and validation loss
+- Model checkpointing for best-performing weights
 
-✅ More realistic patterns.
+# Evaluation Layer
+- Primary Metric: RMSE
+- Validation RMSE tracked across epochs
+- Error analysis using:
+  - Actual vs Predicted scatter plots
+  - Residual distributions
+- Feature impact inspection via correlation plots
 
-⚡ Reduced data leakage risk.
+# Inference Layer
+- Input: Preprocessed test dataset
+- Output: Continuous target predictions
+- Ensure prediction shape and order match Kaggle submission format
 
-✉ Opportunities for feedback and continuous improvement.
+# Submission Layer
+- Generate submission DataFrame
+- Export predictions to CSV format:
+  - sample_submission.csv
+- Ready for direct Kaggle upload
 
-👨‍💻 Dependencies
+# Visualization & Monitoring Layer
+- Feature correlation heatmaps
+- Target and prediction distribution plots
+- Boxplots for feature comparison
+- Scatter plots for prediction quality assessment
 
-To get started, install the necessary Python libraries: pip install numpy pandas matplotlib seaborn missingno scikit-learn tensorflow cudf cuml
+Repository Structure
+data/
+- Raw and processed datasets
 
-📊 Exploratory Data Analysis (EDA)
+notebooks/
+- Jupyter notebooks for EDA and experimentation
 
-The repository includes detailed EDA covering:
+models/
+- Trained model files and checkpoints
 
-📅 Summary statistics of train, test, and extra training datasets.
+scripts/
+- Data preprocessing scripts
+- Model training and inference scripts
 
-📈 Price distribution visualization.
+README.md
+- Project documentation
 
-🔄 Comparison of numerical and categorical variables.
+# Dependencies
+- Python
+- NumPy
+- Pandas
+- Matplotlib
+- Seaborn
+- Missingno
+- scikit-learn
+- TensorFlow
+- cuDF
+- cuML
 
-🌐 Missing values detection and imputation.
+# Execution Flow
+1. Load datasets from data directory
+2. Perform exploratory data analysis
+3. Preprocess and encode features
+4. Train deep neural network model
+5. Validate using RMSE
+6. Generate predictions on test data
+7. Create Kaggle-compatible submission file
 
-⚖️ Feature encoding and scaling.
+# Extensibility
+- Replace DNN with XGBoost, LightGBM, or CatBoost
+- Add feature interaction and polynomial features
+- Introduce cross-validation strategies
+- Support GPU acceleration via cuDF and cuML
 
-🌐 Data Preprocessing
+# Applications
+- Kaggle Tabular Playground Series competitions
+- Hands-on learning of feature engineering
+- Rapid prototyping of tabular ML pipelines
 
-⚖️ Target Encoding: Applied on categorical features.
-
-🏢 Standard Scaling: Normalizing numeric features.
-
-💪 Handling Missing Values: Using median imputation and 'None' for categorical variables.
-
-🤖 Deep Neural Network (DNN) Model
-
-A simple yet effective Deep Learning Model using TensorFlow/Keras:
-
-🛠️ Three dense layers with Batch Normalization and Dropout.
-
-⚙️ L2 regularization to prevent overfitting.
-
-⏳ Early Stopping to optimize training.
-
-🌍 RMSE tracking for model performance.
-
-🎉 Results & Visualization
-
-🌟 Validation RMSE: Tracked during training.
-
-💡 Heatmaps & Boxplots: Feature correlations and distributions.
-
-✨ Scatter Plots: Actual vs Predicted values.
-
-💾 Submission
-
-Once the model is trained:
-
-submission.to_csv('sample_submission.csv', index=False)
-
-Download and submit predictions to Kaggle!
-
-📍 Repository Structure
-
-|-- data/ # Raw and processed datasets |-- notebooks/ # Jupyter notebooks for analysis |-- models/ # Trained model files |-- scripts/ # Python scripts for preprocessing & modeling |-- README.md # Project documentation 💡 Contributions
-
-Want to improve this project? Feel free to fork, star, and submit PRs!
-
-✨ Stay Connected
-
-🌟 Follow the Kaggle Competition here
-
-👤 Connect with us on LinkedIn/Twitter!
-
-Happy Coding! 💪
+# License
+Intended for educational and research purposes. Suitable for competition use and experimentation with synthetic tabular data.
