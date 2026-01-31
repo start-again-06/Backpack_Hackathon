@@ -1,5 +1,4 @@
 # Tabular Playground Series
-System Design and High-Level Architecture
 
 # System Overview
 The Tabular Playground Series system is designed to solve Kaggle’s lightweight tabular machine learning competitions using synthetic datasets. The architecture emphasizes rapid experimentation, robust feature engineering, and reproducible model training workflows to improve applied data science skills.
