@@ -1,4 +1,4 @@
-Tabular Playground Series
+# Tabular Playground Series
 System Design and High-Level Architecture
 
 # System Overview
