@@ -105,9 +105,6 @@ scripts/
 - Data preprocessing scripts
 - Model training and inference scripts
 
-README.md
-- Project documentation
-
 # Dependencies
 - Python
 - NumPy
